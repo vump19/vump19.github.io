@@ -48,19 +48,42 @@ def index(request):
 
 `polls/templates/polls/index.html`
 
-<pre>
-<code>
-{% if latest_question_list %}
+(체크) \\&#37; 에서 \\를 제거하여 소스에 사용해야 합니다.
+
+
+    {\% if latest_question_list %}
     <ul>
-    {% for question in latest_question_list %}
+    {\% for question in latest_question_list %}
         <li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
-    {% endfor %}
+    {\% endfor %}
     </ul>
-{% else %}
-    <p>No polls are available.</p>
-{% endif %}
-</code>
-</pre>
+    {\% else %}
+        <p>No polls are available.</p>
+    {\% endif %}
+
+``` html
+<html lang="ko">
+<head>
+    <title>{{ site.name }}</title>
+
+    {% block css %}
+    {% endblock %}
+</head>
+<body class="st-container st-effect-3">
+
+<div class="wrapper">
+
+    {% block leader %}
+        <h1>{% block title %}Title{% endblock %}</h1>
+        <p>{% block subtitle %}Subtitle{% endblock %}</p>
+    {% endblock %}
+
+    {% block content %}
+    {% endblock %}
+</div>
+</body>
+</html>
+```
 
 이제, 템플릿을 이용하여 polls/views.py에 index 뷰를 업데이트 해보도록 하겠습니다.
 
